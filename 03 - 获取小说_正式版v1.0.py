@@ -54,11 +54,11 @@ def get_article(article_html, index):
 
 
 def save(chapter, article, name, i):
-    if not os.path.exists(name):
-        os.mkdir(name)
-    print(chapter)
-    if not os.path.exists(os.path.join(name, chapter + '.txt')):
-        with open(os.path.join(name, chapter + '.txt'), 'w+', encoding='utf-8') as f:
+    if not os.path.exists(f"../小说/{name}"):
+        os.mkdir(f"../小说/{name}")
+    # print(chapter)
+    if not os.path.exists(os.path.join(f"../小说/{name}", chapter + '.txt')):
+        with open(os.path.join(f"../小说/{name}", chapter + '.txt'), 'w+', encoding='utf-8') as f:
             f.write(chapter)
             f.write('\r\n')
             f.write(article)
@@ -87,6 +87,8 @@ if __name__ == '__main__':
     sub_t4 = threading.Thread(target=control, args=Aim, daemon=True)
     sub_t5 = threading.Thread(target=control, args=Aim, daemon=True)
 
+    print("采集开始")
+
     sub_t1.start()
     sub_t2.start() 
     sub_t3.start()
@@ -98,3 +100,5 @@ if __name__ == '__main__':
     sub_t3.join()
     sub_t4.join()
     sub_t5.join()
+
+    print("采集完成")
